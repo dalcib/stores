@@ -2,52 +2,43 @@ import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Input, Icon, Button } from "react-native-elements";
 import { validateEmail } from "../../utils/validation";
-import * as firebase from "firebase";
 import { withNavigation } from "react-navigation";
+import * as firebase from "firebase";
 import Loading from "../Loading";
 
-function RegisterForm(props) {
+function LoginForm(props) {
   const { toastRef, navigation } = props;
   const [hidePassword, setHidePassword] = useState(true);
-  const [hideRepeatPassword, setHideRepeatPassword] = useState(true);
-  const [isVisibleLoading, setIsVisibleLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState("");
+  const [isVisibleLoading, setIsVisibleLoading] = useState(false);
 
-  const register = async () => {
+  const login = async () => {
     setIsVisibleLoading(true);
-    if (!email || !password || !repeatPassword) {
+    if (!email || !password) {
       toastRef.current.show("Todos los campos son obligatorios");
     } else {
       if (!validateEmail(email)) {
         toastRef.current.show("El email ingresado es incorrecto");
       } else {
-        if (password !== repeatPassword) {
-          toastRef.current.show("Las contraseñas no coinciden");
-        } else {
-          await firebase
-            .auth()
-            .createUserWithEmailAndPassword(email, password)
-            .then(() => {
-              navigation.navigate("MyAccount");
-            })
-            .catch(() => {
-              toastRef.current.show(
-                "Ha ocurrido un error, inténtelo más tarde"
-              );
-            });
-        }
+        await firebase
+          .auth()
+          .signInWithEmailAndPassword(email, password)
+          .then(() => {
+            navigation.navigate("MyAccount");
+          })
+          .catch(() => {
+            toastRef.current.show("Correo o contraseña incorrectos");
+          });
       }
     }
-
     setIsVisibleLoading(false);
   };
 
   return (
     <View style={styles.formContainer}>
       <Input
-        placeholder="Correo Electrónico"
+        placeholder="Correo electrónico"
         containerStyle={styles.inputForm}
         onChange={e => setEmail(e.nativeEvent.text)}
         rightIcon={
@@ -60,9 +51,9 @@ function RegisterForm(props) {
       />
       <Input
         placeholder="Contraseña"
+        containerStyle={styles.inputForm}
         password={true}
         secureTextEntry={hidePassword}
-        containerStyle={styles.inputForm}
         onChange={e => setPassword(e.nativeEvent.text)}
         rightIcon={
           <Icon
@@ -73,33 +64,18 @@ function RegisterForm(props) {
           />
         }
       />
-      <Input
-        placeholder="Confirmar Contraseña"
-        password={true}
-        secureTextEntry={hideRepeatPassword}
-        containerStyle={styles.inputForm}
-        onChange={e => setRepeatPassword(e.nativeEvent.text)}
-        rightIcon={
-          <Icon
-            type="material-community"
-            name={hideRepeatPassword ? "eye-outline" : "eye-off-outline"}
-            iconStyle={styles.iconRight}
-            onPress={() => setHideRepeatPassword(!hideRepeatPassword)}
-          />
-        }
-      />
       <Button
-        title="Registrarse"
-        containerStyle={styles.btnContainerRegister}
-        buttonStyle={styles.btnRegister}
-        onPress={register}
+        title="Iniciar Sesión"
+        containerStyle={styles.btnContainerLogin}
+        buttonStyle={styles.btnLogin}
+        onPress={login}
       />
-      <Loading text="Creando cuenta" isVisible={isVisibleLoading} />
+      <Loading isVisible={isVisibleLoading} text="Iniciando Sesión" />
     </View>
   );
 }
 
-export default withNavigation(RegisterForm);
+export default withNavigation(LoginForm);
 
 const styles = StyleSheet.create({
   formContainer: {
@@ -115,11 +91,11 @@ const styles = StyleSheet.create({
   iconRight: {
     color: "#c1c1c1"
   },
-  btnContainerRegister: {
+  btnContainerLogin: {
     marginTop: 20,
     width: "95%"
   },
-  btnRegister: {
+  btnLogin: {
     backgroundColor: "#00a680"
   }
 });

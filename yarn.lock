@@ -4836,6 +4836,13 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+react-native-easy-toast@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-easy-toast/-/react-native-easy-toast-1.2.0.tgz#0f70bcb99e3306cda4800c244bfb4a67d42276ed"
+  integrity sha512-UtpxnRn1ME+035Uey4VR+9K0P4aVoTcWNOx5QkioWBe3LBKMPb/kZjrQ1LtvWzOyeGP4TeTUTtMX3IOPWv5MtA==
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-elements@^1.2.7:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/react-native-elements/-/react-native-elements-1.2.7.tgz#1eca2db715c41722aeb67aea62bd2a4621adb134"
