@@ -69,7 +69,7 @@ const NavigationStacks = createBottomTabNavigator(
   },
   {
     // Screen de inicio de la app
-    initialRouteName: "Account",
+    initialRouteName: "Stores",
     order: ["Stores", "TopLists", "Search", "Account"],
     tabBarOptions: {
       inactiveTintColor: "#646464",
