@@ -16,7 +16,7 @@ const db = firebase.firestore(firebaseApp);
 const WidthScreen = Dimensions.get("window").width;
 
 export default function AddStoreForm(props) {
-  const { toastRef, setIsLoading, navigation } = props;
+  const { toastRef, setIsLoading, navigation, setIsReloadStores } = props;
   const [imagesSelected, setImagesSelected] = useState([]);
   const [storeName, setStoreName] = useState("");
   const [storeAddress, setStoreAddress] = useState("");
@@ -49,6 +49,7 @@ export default function AddStoreForm(props) {
           })
           .then(() => {
             setIsLoading(false);
+            setIsReloadStores(true);
             navigation.navigate("Stores");
           })
           .catch(() => {

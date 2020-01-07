@@ -11,7 +11,7 @@ import { Image } from "react-native-elements";
 import * as firebase from "firebase";
 
 export default function ListStores(props) {
-  const { stores, isLoading } = props;
+  const { stores, isLoading, handleLoadMore } = props;
   return (
     <View>
       {stores ? (
@@ -19,7 +19,7 @@ export default function ListStores(props) {
           data={stores}
           renderItem={store => <Store store={store} />}
           keyExtractor={(item, index) => index.toString()}
-          //onEndReached={}
+          onEndReached={handleLoadMore}
           onEndReachedThreshold={0}
           ListFooterComponent={<FooterList isLoading={isLoading} />}
         />
