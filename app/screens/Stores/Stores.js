@@ -86,6 +86,7 @@ export default function Stores(props) {
         stores={stores}
         isLoading={isLoading}
         handleLoadMore={handleLoadMore}
+        navigation={navigation}
       />
       {user && (
         <AddStoresButton

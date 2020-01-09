@@ -21,6 +21,8 @@ export default function AddStoreForm(props) {
   const [storeName, setStoreName] = useState("");
   const [storeAddress, setStoreAddress] = useState("");
   const [storeDescription, setStoreDescription] = useState("");
+  const [phoneStore, setPhoneStore] = useState("");
+  const [emailStore, setEmailStore] = useState("");
   const [isVisibleMap, setIsVisibleMap] = useState(false);
   const [locationStore, setLocationStore] = useState(null);
 
@@ -40,6 +42,8 @@ export default function AddStoreForm(props) {
             address: storeAddress,
             description: storeDescription,
             location: locationStore,
+            phone: phoneStore,
+            email: emailStore,
             images: arrayImages,
             rating: 0,
             ratingTotal: 0,
@@ -85,6 +89,8 @@ export default function AddStoreForm(props) {
         setStoreName={setStoreName}
         setStoreAddress={setStoreAddress}
         setStoreDescription={setStoreDescription}
+        setPhoneStore={setPhoneStore}
+        setEmailStore={setEmailStore}
         setIsVisibleMap={setIsVisibleMap}
         locationStore={locationStore}
       />
@@ -207,6 +213,8 @@ function FormAdd(props) {
     setStoreName,
     setStoreAddress,
     setStoreDescription,
+    setPhoneStore,
+    setEmailStore,
     setIsVisibleMap,
     locationStore
   } = props;
@@ -227,6 +235,24 @@ function FormAdd(props) {
           onPress: () => setIsVisibleMap(true)
         }}
         onChange={e => setStoreAddress(e.nativeEvent.text)}
+      />
+      <Input
+        placeholder="Teléfono"
+        containerStyle={styles.input}
+        rightIcon={{
+          type: "material-community",
+          name: "phone"
+        }}
+        onChange={e => setPhoneStore(e.nativeEvent.text)}
+      />
+      <Input
+        placeholder="Correo de Contacto"
+        containerStyle={styles.input}
+        rightIcon={{
+          type: "material-community",
+          name: "at"
+        }}
+        onChange={e => setEmailStore(e.nativeEvent.text)}
       />
       <Input
         placeholder="Descripción"

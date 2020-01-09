@@ -11,13 +11,13 @@ import { Image } from "react-native-elements";
 import * as firebase from "firebase";
 
 export default function ListStores(props) {
-  const { stores, isLoading, handleLoadMore } = props;
+  const { stores, isLoading, handleLoadMore, navigation } = props;
   return (
     <View>
       {stores ? (
         <FlatList
           data={stores}
-          renderItem={store => <Store store={store} />}
+          renderItem={store => <Store store={store} navigation={navigation} />}
           keyExtractor={(item, index) => index.toString()}
           onEndReached={handleLoadMore}
           onEndReachedThreshold={0}
@@ -34,7 +34,7 @@ export default function ListStores(props) {
 }
 
 function Store(props) {
-  const { store } = props;
+  const { store, navigation } = props;
   const { name, address, description, images } = store.item.store;
   const [imageStore, setImageStore] = useState(null);
 
@@ -50,7 +50,7 @@ function Store(props) {
   });
 
   return (
-    <TouchableOpacity onPress={() => console.log("ir al store")}>
+    <TouchableOpacity onPress={() => navigation.navigate("Store", { store })}>
       <View style={styles.viewStore}>
         <View style={styles.viewStoreImage}>
           <Image

@@ -13,7 +13,7 @@ const NavigationStacks = createBottomTabNavigator(
     Stores: {
       screen: StoresScreenStacks,
       navigationOptions: () => ({
-        tabBarLabel: "Tiendas",
+        tabBarLabel: "Veterinarias",
         tabBarIcon: ({ tintColor }) => (
           <Icon
             type="material-community"
