@@ -3,6 +3,7 @@ import { StyleSheet, View, ScrollView, Text, Dimensions } from "react-native";
 import { Rating, Icon, ListItem } from "react-native-elements";
 import Carousel from "../../components/Carousel";
 import Map from "../../components/Map";
+import ListReviews from "../../components/Stores/ListReviews";
 import * as firebase from "firebase";
 
 const screenWidth = Dimensions.get("window").width;
@@ -11,8 +12,7 @@ export default function Store(props) {
   const { navigation } = props;
   const { store } = navigation.state.params.store.item;
   const [imageStore, setImageStore] = useState([]);
-
-  //console.log(store);
+  const [rating, setRating] = useState(store.rating);
 
   useEffect(() => {
     const arrayURLS = [];
@@ -38,7 +38,7 @@ export default function Store(props) {
       <TitleStore
         name={store.name}
         description={store.description}
-        rating={store.rating}
+        rating={rating}
       />
       <StoreInfo
         location={store.location}
@@ -46,6 +46,11 @@ export default function Store(props) {
         address={store.address}
         phone={store.phone}
         email={store.email}
+      />
+      <ListReviews
+        navigation={navigation}
+        idStore={store.id}
+        setRating={setRating}
       />
     </ScrollView>
   );
