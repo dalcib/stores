@@ -10,34 +10,41 @@ export default function LoginFacebook(props) {
   const [isLoading, setIsLoading] = useState(false);
 
   const login = async () => {
-    const {
-      type,
-      token
-    } = await Facebook.logInWithReadPermissionsAsync(
-      FacebookApi.application_id,
-      { permissions: FacebookApi.permissions }
-    );
+    try {
+      await Facebook.initializeAsync("553988602116461");
+      const {
+        type,
+        token
+      } = await Facebook.logInWithReadPermissionsAsync(
+        FacebookApi.application_id,
+        { permissions: FacebookApi.permissions }
+      );
 
-    if (type === "success") {
-      setIsLoading(true);
-      const credentials = firebase.auth.FacebookAuthProvider.credential(token);
-      await firebase
-        .auth()
-        .signInWithCredential(credentials)
-        .then(() => {
-          navigation.navigate("MyAccount");
-        })
-        .catch(() => {
-          toastRef.current.show(
-            "Error accediendo con Facebook, inténtelo más tarde"
-          );
-        });
-    } else if (type === "cancel") {
-      toastRef.current.show("Inicio de sesión cancelado");
-    } else {
-      toastRef.current.show("Error desconocido, inténtelo más tarde");
+      if (type === "success") {
+        setIsLoading(true);
+        const credentials = firebase.auth.FacebookAuthProvider.credential(
+          token
+        );
+        await firebase
+          .auth()
+          .signInWithCredential(credentials)
+          .then(() => {
+            navigation.navigate("MyAccount");
+          })
+          .catch(() => {
+            toastRef.current.show(
+              "Error accediendo con Facebook, inténtelo más tarde"
+            );
+          });
+      } else if (type === "cancel") {
+        toastRef.current.show("Inicio de sesión cancelado");
+      } else {
+        toastRef.current.show("Error desconocido, inténtelo más tarde");
+      }
+      setIsLoading(false);
+    } catch ({ message }) {
+      alert(`Facebook Login Error: ${message}`);
     }
-    setIsLoading(false);
   };
 
   return (
