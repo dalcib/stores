@@ -23,7 +23,7 @@ export default function ListReviews(props) {
         .then(response => {
           response.forEach(doc => {
             resultReviews.push(doc.data());
-            arrayRating.push(doc.data.rating);
+            arrayRating.push(doc.data().rating);
           });
 
           let numSum = 0;
