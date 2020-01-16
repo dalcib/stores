@@ -38,6 +38,8 @@ function Store(props) {
   const { name, address, description, images } = store.item.store;
   const [imageStore, setImageStore] = useState(null);
 
+  const imageUri = imageStore != null ? imageStore : "";
+
   useEffect(() => {
     const image = images[0];
     firebase
@@ -55,7 +57,8 @@ function Store(props) {
         <View style={styles.viewStoreImage}>
           <Image
             resizeMode="cover"
-            source={{ uri: imageStore }}
+            //source={{ uri: imageStore }}
+            source={imageUri.length != 0 ? { uri: imageUri } : null}
             style={styles.imageStore}
             PlaceholderContent={<ActivityIndicator color="#fff" />}
           />

@@ -6,6 +6,12 @@ import Map from "../../components/Map";
 import ListReviews from "../../components/Stores/ListReviews";
 import Toast from "react-native-easy-toast";
 
+import { YellowBox } from "react-native";
+
+YellowBox.ignoreWarnings([
+  "VirtualizedLists should never be nested" // TODO: Remove when fixed
+]);
+
 import { firebaseApp } from "../../utils/firebase";
 import firebase from "firebase/app";
 import "firebase/firestore";
@@ -48,7 +54,7 @@ export default function Store(props) {
     if (userLogged) {
       db.collection("favorites")
         .where("idStore", "==", store.id)
-        .where("idUser", "==", firebaste.auth().currentUser.uid)
+        .where("idUser", "==", firebase.auth().currentUser.uid)
         .get()
         .then(response => {
           if (response.docs.length === 1) {
@@ -91,30 +97,37 @@ export default function Store(props) {
       .where("idUser", "==", firebase.auth().currentUser.uid)
       .get()
       .then(response => {
-        response
-          .forEach(doc => {
-            const idFavorite = doc.id;
-            db.collection("favorites")
-              .doc(idFavorite)
-              .delete()
-              .then(() => {
-                setIsFavorite(false);
-                toastRef.current.show(
-                  "Veterinaria eliminada de la lista de favoritos"
-                );
-              });
-          })
-          .catch(() => {
-            toastRef.current.show(
-              "No se ha podido eliminar, inténtelo más tarde"
-            );
-          });
+        response.forEach(doc => {
+          const idFavorite = doc.id;
+          db.collection("favorites")
+            .doc(idFavorite)
+            .delete()
+            .then(() => {
+              setIsFavorite(false);
+              toastRef.current.show("Veterinaria eliminada de favoritos");
+            })
+            .catch(() => {
+              toastRef.current.show(
+                "No se ha podido eliminar, inténtelo más tarde"
+              );
+            });
+        });
       });
   };
 
   return (
     <ScrollView style={styles.viewBody}>
-      <Carousel arrayImages={imageStore} width={screenWidth} height={200} />
+      <View style={styles.viewFavorite}>
+        <Icon
+          type="material-community"
+          name={isFavorite ? "heart" : "heart-outline"}
+          onPress={isFavorite ? removeFavorite : addFavorite}
+          color={isFavorite ? "#e0115f" : "#000"}
+          size={35}
+          underlayColor="transparent"
+        />
+      </View>
+      <Carousel arrayImages={imageStore} width={screenWidth} height={250} />
       <TitleStore
         name={store.name}
         description={store.description}
@@ -158,6 +171,7 @@ function TitleStore(props) {
 
 function StoreInfo(props) {
   const { location, name, address, phone, email } = props;
+
   const listInfo = [
     {
       text: address,

@@ -92,7 +92,6 @@ export default function ListReviews(props) {
 function Review(props) {
   const { title, review, rating, createAt, avatarUser } = props.review.item;
   const createReview = new Date(createAt.seconds * 1000);
-  console.log(props.review.item);
 
   return (
     <View style={styles.viewReview}>
