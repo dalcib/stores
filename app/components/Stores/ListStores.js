@@ -20,7 +20,7 @@ export default function ListStores(props) {
           renderItem={store => <Store store={store} navigation={navigation} />}
           keyExtractor={(item, index) => index.toString()}
           onEndReached={handleLoadMore}
-          onEndReachedThreshold={0}
+          onEndReachedThreshold={0.5}
           ListFooterComponent={<FooterList isLoading={isLoading} />}
         />
       ) : (
