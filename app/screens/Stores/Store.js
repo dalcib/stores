@@ -6,12 +6,6 @@ import Map from "../../components/Map";
 import ListReviews from "../../components/Stores/ListReviews";
 import Toast from "react-native-easy-toast";
 
-import { YellowBox } from "react-native";
-
-YellowBox.ignoreWarnings([
-  "VirtualizedLists should never be nested" // TODO: Remove when fixed
-]);
-
 import { firebaseApp } from "../../utils/firebase";
 import firebase from "firebase/app";
 import "firebase/firestore";
@@ -67,7 +61,7 @@ export default function Store(props) {
   const addFavorite = () => {
     if (!userLogged) {
       toastRef.current.show(
-        "Para usar el sistema de favoritos tienes que estar logeado",
+        "Para usar el sistema de favoritos debes iniciar sesión",
         2000
       );
     } else {
