@@ -5,6 +5,7 @@ import Carousel from "react-native-banner-carousel";
 
 export default function CarouselImages(props) {
   const { arrayImages, height, width } = props;
+
   return (
     <Carousel
       autoplay

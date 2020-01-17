@@ -142,7 +142,7 @@ function UploadImage(props) {
     const resultPermissionCamera =
       resultPermission.permissions.cameraRoll.status;
 
-    if (resultPermission === "denied") {
+    if (resultPermissionCamera === "denied") {
       toastRef.current.show("Es necesario aceptar los permisos de la Galería"),
         3000;
     } else {
@@ -190,7 +190,7 @@ function UploadImage(props) {
         <Icon
           type="material-community"
           name="camera"
-          color="#a7a7a7"
+          color="#7a7a7a"
           containerStyle={styles.containerIcon}
           onPress={imageSelect}
         />
@@ -316,7 +316,7 @@ function Map(props) {
         )}
         <View style={styles.viewMapBtn}>
           <Button
-            title="Guardar"
+            title="Guardar Ubicación"
             onPress={confirmLocation}
             containerStyle={styles.viewMapBtnContainerSave}
             buttonStyle={styles.viewMapBtnSave}

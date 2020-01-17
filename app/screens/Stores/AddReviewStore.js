@@ -27,7 +27,6 @@ export default function AddReviewStore(props) {
       toastRef.current.show("El comentario es obligatorio");
     } else {
       setIsLoading(true);
-
       const user = firebase.auth().currentUser;
       const payload = {
         idUser: user.uid,

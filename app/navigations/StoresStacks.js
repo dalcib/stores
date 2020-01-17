@@ -20,7 +20,7 @@ const StoresScreenStacks = createStackNavigator({
   Store: {
     screen: StoreScreen,
     navigationOptions: props => ({
-      title: props.navigation.state.params.store.item.store.name
+      title: props.navigation.state.params.store.name
     })
   },
   AddReviewStore: {

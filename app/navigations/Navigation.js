@@ -7,6 +7,7 @@ import StoresScreenStacks from "./StoresStacks";
 import TopListScreenStacks from "./TopListsStacks";
 import SearchScreenStacks from "./SearchStacks";
 import AccountScreenStacks from "./AccountStacks";
+import FavoritesScreenStacks from "./FavoritesStacks";
 
 const NavigationStacks = createBottomTabNavigator(
   {
@@ -18,6 +19,20 @@ const NavigationStacks = createBottomTabNavigator(
           <Icon
             type="material-community"
             name="compass-outline"
+            size={22}
+            color={tintColor}
+          />
+        )
+      })
+    },
+    Favorites: {
+      screen: FavoritesScreenStacks,
+      navigationOptions: () => ({
+        tabBarLabel: "Favoritos",
+        tabBarIcon: ({ tintColor }) => (
+          <Icon
+            type="material-community"
+            name="heart-outline"
             size={22}
             color={tintColor}
           />
@@ -70,7 +85,7 @@ const NavigationStacks = createBottomTabNavigator(
   {
     // Screen de inicio de la app
     initialRouteName: "Stores",
-    order: ["Stores", "TopLists", "Search", "Account"],
+    order: ["Stores", "Favorites", "TopLists", "Search", "Account"],
     tabBarOptions: {
       inactiveTintColor: "#646464",
       activeTintColor: "#00a680"

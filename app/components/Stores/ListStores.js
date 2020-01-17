@@ -12,6 +12,7 @@ import * as firebase from "firebase";
 
 export default function ListStores(props) {
   const { stores, isLoading, handleLoadMore, navigation } = props;
+
   return (
     <View>
       {stores ? (
@@ -52,7 +53,9 @@ function Store(props) {
   });
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate("Store", { store })}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("Store", { store: store.item.store })}
+    >
       <View style={styles.viewStore}>
         <View style={styles.viewStoreImage}>
           <Image

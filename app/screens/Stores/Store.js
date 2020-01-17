@@ -21,7 +21,7 @@ const screenWidth = Dimensions.get("window").width;
 
 export default function Store(props) {
   const { navigation } = props;
-  const { store } = navigation.state.params.store.item;
+  const { store } = navigation.state.params;
   const [imageStore, setImageStore] = useState([]);
   const [rating, setRating] = useState(store.rating);
   const [isFavorite, setIsFavorite] = useState(false);

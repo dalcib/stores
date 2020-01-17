@@ -16,7 +16,7 @@ export default function Stores(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [totalStores, setTotalStores] = useState(0);
   const [isReloadStores, setIsReloadStores] = useState(false);
-  const limitStores = 8;
+  const limitStores = 12;
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(userInfo => {
