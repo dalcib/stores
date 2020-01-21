@@ -56,7 +56,7 @@ export default function Store(props) {
           }
         });
     }
-  }, []);
+  }, [userLogged]);
 
   const addFavorite = () => {
     if (!userLogged) {

@@ -54,7 +54,7 @@ export default function Favorites(props) {
         });
     }
     setReloadStores(false);
-  }, [reloadStores]);
+  }, [setReloadStores, userLogged]);
 
   const getDataStores = idStoresArray => {
     const arrayStores = [];
