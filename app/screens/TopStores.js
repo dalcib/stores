@@ -1,21 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  StyleSheet,
-  View,
-  ScrollView,
-  Text,
-  ActivityIndicator,
-  TouchableOpacity
-} from "react-native";
-import { Card, Image, Rating } from "react-native-elements";
+import { View } from "react-native";
+import Toast from "react-native-easy-toast";
+import ListTopStores from "../components/Ranking/ListTopStores";
 
 import { firebaseApp } from "../utils/firebase";
 import firebase from "firebase/app";
 import "firebase/firestore";
 const db = firebase.firestore(firebaseApp);
 
-export default function TopStores() {
+export default function TopStores(props) {
+  const { navigation } = props;
   const [stores, setStores] = useState([]);
+  const toastRef = useRef();
 
   useEffect(() => {
     (async () => {
@@ -25,16 +21,26 @@ export default function TopStores() {
         .get()
         .then(response => {
           const storesArray = [];
+          response.forEach(doc => {
+            let store = doc.data();
+            store.id = doc.id;
+            storesArray.push(store);
+          });
+          setStores(storesArray);
         })
         .catch(() => {
-          console.log("error al cargar el rating");
+          toastRef.current.show(
+            "Error al cargar el Ranking, inténtelo más tarde",
+            3000
+          );
         });
     })();
   }, []);
 
   return (
     <View>
-      <Text>Estamos en el ranking de Tiendas.</Text>
+      <ListTopStores stores={stores} navigation={navigation} />
+      <Toast ref={toastRef} position="center" opacity={0.7} />
     </View>
   );
 }
