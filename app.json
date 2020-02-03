@@ -18,9 +18,11 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.midoriapps.vetchillan",
+      "supportsTablet": false
     },
     "android": {
+      "package": "com.midoriapps.vetchillan",
       "permissions": ["CAMERA_ROLL", "LOCATION"]
     }
   }
