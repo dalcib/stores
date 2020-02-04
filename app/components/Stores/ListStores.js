@@ -36,7 +36,7 @@ export default function ListStores(props) {
 
 function Store(props) {
   const { store, navigation } = props;
-  const { name, address, description, images } = store.item.store;
+  const { name, address, description, images, city } = store.item.store;
   const [imageStore, setImageStore] = useState(null);
 
   const imageUri = imageStore != null ? imageStore : "";
@@ -72,6 +72,7 @@ function Store(props) {
           <Text style={styles.storeDescription}>
             {description.substr(0, 60)}...
           </Text>
+          <Text style={styles.storeName}>{city}</Text>
         </View>
       </View>
     </TouchableOpacity>

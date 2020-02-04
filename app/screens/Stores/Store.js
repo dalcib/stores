@@ -129,6 +129,7 @@ export default function Store(props) {
       />
       <StoreInfo
         location={store.location}
+        city={store.city}
         name={store.name}
         address={store.address}
         phone={store.phone}
@@ -164,9 +165,15 @@ function TitleStore(props) {
 }
 
 function StoreInfo(props) {
-  const { location, name, address, phone, email } = props;
+  const { location, name, address, phone, email, city } = props;
 
   const listInfo = [
+    {
+      text: city,
+      iconName: "city",
+      iconType: "material-community",
+      action: null
+    },
     {
       text: address,
       iconName: "map-marker",

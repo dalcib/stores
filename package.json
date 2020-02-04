@@ -33,7 +33,7 @@
     "react-navigation": "^4.0.10",
     "react-navigation-stack": "^2.0.4",
     "react-navigation-tabs": "^2.7.0",
-    "use-debounce": "^3.3.0",
+    "use-debounce": "3.1.0",
     "uuid": "^3.3.3"
   },
   "devDependencies": {

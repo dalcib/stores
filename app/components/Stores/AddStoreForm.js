@@ -21,13 +21,21 @@ export default function AddStoreForm(props) {
   const [storeName, setStoreName] = useState("");
   const [storeAddress, setStoreAddress] = useState("");
   const [storeDescription, setStoreDescription] = useState("");
+  const [storeCity, setStoreCity] = useState("");
   const [phoneStore, setPhoneStore] = useState("");
   const [emailStore, setEmailStore] = useState("");
   const [isVisibleMap, setIsVisibleMap] = useState(false);
   const [locationStore, setLocationStore] = useState(null);
 
   const addStore = () => {
-    if (!storeName || !storeAddress || !storeDescription) {
+    if (
+      !storeName ||
+      !storeCity ||
+      !storeAddress ||
+      !storeDescription ||
+      !phoneStore ||
+      !emailStore
+    ) {
       toastRef.current.show("Todos los campos son obligatorios"), 2000;
     } else if (imagesSelected.length === 0) {
       toastRef.current.show("Debes subir al menos 1 imagen"), 2000;
@@ -39,6 +47,7 @@ export default function AddStoreForm(props) {
         db.collection("stores")
           .add({
             name: storeName,
+            city: storeCity,
             address: storeAddress,
             description: storeDescription,
             location: locationStore,
@@ -87,6 +96,7 @@ export default function AddStoreForm(props) {
       <PortadaImageStore imageStore={imagesSelected[0]} />
       <FormAdd
         setStoreName={setStoreName}
+        setStoreCity={setStoreCity}
         setStoreAddress={setStoreAddress}
         setStoreDescription={setStoreDescription}
         setPhoneStore={setPhoneStore}
@@ -211,6 +221,7 @@ function UploadImage(props) {
 function FormAdd(props) {
   const {
     setStoreName,
+    setStoreCity,
     setStoreAddress,
     setStoreDescription,
     setPhoneStore,
@@ -224,6 +235,11 @@ function FormAdd(props) {
         placeholder="Nombre Veterinaria"
         containerStyle={styles.input}
         onChange={e => setStoreName(e.nativeEvent.text)}
+      />
+      <Input
+        placeholder="Ciudad"
+        containerStyle={styles.input}
+        onChange={e => setStoreCity(e.nativeEvent.text)}
       />
       <Input
         placeholder="Dirección"
